@@ -668,6 +668,16 @@ Possible values are:
   :type 'function
   :group 'treemacs)
 
+(defcustom treemacs-pick-directory-face #'(lambda (_ default) default)
+  "Given the path to a directory, pick a face to display it with."
+  :type 'function
+  :group 'treemacs)
+
+(defcustom treemacs-pick-file-face #'(lambda (_ default) default)
+  "Given the path to a file, pick a face to display it with."
+  :type 'function
+  :group 'treemacs)
+
 (make-obsolete-variable 'treemacs-follow-recenter-distance 'treemacs-recenter-distance "v2.5")
 (defcustom treemacs-follow-recenter-distance 0.1
   "Minimum distance from the top/bottom for (tag-)follow mode to recenter.

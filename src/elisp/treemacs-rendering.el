@@ -241,7 +241,7 @@ DEPTH indicates how deep in the filetree the current button is."
                     'category t
                     'help-echo nil
                     'keymap nil
-                    :default-face 'treemacs-directory-face
+                    :default-face (funcall treemacs-pick-file-face ,path 'treemacs-directory-face)
                     :state 'dir-node-closed
                     :path ,path
                     :key ,path
@@ -264,7 +264,7 @@ DEPTH indicates how deep in the filetree the current button is."
                   'category t
                   'help-echo nil
                   'keymap nil
-                  :default-face 'treemacs-git-unmodified-face
+                  :default-face (funcall treemacs-pick-file-face ,path 'treemacs-git-unmodified-face)
                   :state 'file-node-closed
                   :path ,path
                   :key ,path
@@ -520,7 +520,9 @@ set to PARENT."
                     0
                     (length it)
                     'face
-                    'treemacs-directory-face
+                    (funcall treemacs-pick-file-face
+                      (get-text-property 0 :path it)
+                      'treemacs-directory-face)
                     it)
                    it)))
          (insert (apply #'concat dir-strings))
@@ -542,7 +544,9 @@ set to PARENT."
                     0
                     (length it)
                     'face
-                    'treemacs-git-unmodified-face
+                    (funcall treemacs-pick-file-face
+                      (get-text-property 0 :path it)
+                      'treemacs-git-unmodified-face)
                     it)
                    it)))
          (insert (apply #'concat file-strings))
@@ -1066,10 +1070,10 @@ DEPTH: Int"
               (setf
                strs (treemacs--create-dir-button-strings
                      ,path prefix ,parent ,depth)
-               face 'treemacs-directory-face)
+               face (funcall treemacs-pick-directory-face ,path 'treemaces-directory-face))
             (setf strs (treemacs--create-file-button-strings
                         ,path prefix ,parent ,depth)
-                  face 'treemacs-file-face))
+                  face (funcall treemacs-pick-file-face ,path 'treemacs-file-face)))
           (-let [last (-last-item strs)]
             (put-text-property 0 (length last) 'face face last))
           strs))))) )
