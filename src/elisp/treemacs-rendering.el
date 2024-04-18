@@ -232,7 +232,7 @@ PARENT is the (optional) button under which this one is inserted.
 DEPTH indicates how deep in the filetree the current button is."
   (inline-letevals (path prefix parent depth)
     (inline-quote
-     (let ((dir-name (file-name-nondirectory ,path)))
+     (let ((dir-name (funcall treemacs-directory-path-to-name ,path)))
        (list
         ,prefix
         (treemacs-icon-for-dir dir-name 'closed)
@@ -259,7 +259,7 @@ DEPTH indicates how deep in the filetree the current button is."
      (list
       ,prefix
       (treemacs-icon-for-file ,path)
-      (propertize (->> ,path file-name-nondirectory (funcall treemacs-file-name-transformer))
+      (propertize (->> ,path (funcall treemacs-file-path-to-name) (funcall treemacs-file-name-transformer))
                   'button '(t)
                   'category t
                   'help-echo nil

@@ -658,6 +658,16 @@ Possible values are:
   :type 'function
   :group 'treemacs)
 
+(defcustom treemacs-directory-path-to-name #'file-name-nondirectory
+  "Transformer from directory paths to strings to display."
+  :type 'function
+  :group 'treemacs)
+
+(defcustom treemacs-file-path-to-name #'file-name-nondirectory
+  "Transformer from file paths to strings to display."
+  :type 'function
+  :group 'treemacs)
+
 (make-obsolete-variable 'treemacs-follow-recenter-distance 'treemacs-recenter-distance "v2.5")
 (defcustom treemacs-follow-recenter-distance 0.1
   "Minimum distance from the top/bottom for (tag-)follow mode to recenter.
